@@ -8,22 +8,21 @@ func TestHello(t *testing.T) {
 	t.Run("hello with param", func(t *testing.T) {
 		want := "Hello, Jelte!"
 		have := Hello("Jelte")
-
-		if want != have {
-			t.Errorf("want=%v, have=%v\n", want, have)
-		}
+        
+        assertEqual(want, have, t)
 	})
     t.Run("should be world", func(t *testing.T) {
         want := "Hello, world!"
         have := Hello("")
 
-        if want != have {
-            report(want, have, t)
-        }
+        assertEqual(want, have, t)
     })
 }
 
-func report(want string, have string, t *testing.T) {
-    t.Errorf("want=%v, have=%v\n", want, have)
+func assertEqual(want string, have string, t testing.TB) {
+    t.Helper()
+    if want != have {
+        t.Errorf("want=%v, have=%v\n", want, have)
+    }
 }
 
